@@ -7,25 +7,26 @@
       fx:controller="org.example.projectjavafxhibernate.Controller.PatientController">
     <HBox spacing="10">
         <VBox>
-            <TextField fx:id="txtNom" promptText="Nom"/>
-            <TextField fx:id="txtPrenom" promptText="Prénom"/>
-            <DatePicker fx:id="dateNaissancePicker" promptText="Date de Naissance"/>
-            <TextField fx:id="txtAdresse" promptText="Adresse"/>
-            <TextField fx:id="txtTel" promptText="Téléphone"/>
-            <TextField fx:id="txtEmail" promptText="Email"/>
-            <ChoiceBox fx:id="choiceSexe"/>
-            <ChoiceBox fx:id="choiceGsanguin"/>
-            <ChoiceBox fx:id="choiceSituation"/>
+            <TextField fx:id="txtNombre" promptText="Nombre"/>
+            <TextField fx:id="txtApellido" promptText="Apellido"/>
+            <DatePicker fx:id="dateNacimientoPicker" promptText="Fecha de Nacimiento"/>
+            <TextField fx:id="txtDireccion" promptText="Dirección"/>
+            <TextField fx:id="txtTelefono" promptText="Teléfono"/>
+            <TextField fx:id="txtCorreoElectronico" promptText="Correo Electrónico"/>
+            <ChoiceBox fx:id="choiceSexo"/>
+            <ChoiceBox fx:id="choiceGrupoSanguineo"/>
+            <ChoiceBox fx:id="choiceEstadoCivil"/>
         </VBox>
         <VBox>
-            <Button text="Ajouter" onAction="#addPatient"/>
-            <Button text="Supprimer" onAction="#deletePatient"/>
+            <Button text="Añadir" onAction="#addPatient"/>
+            <Button text="Editar" onAction="#editPatient"/>
+            <Button text="Eliminar" onAction="#deletePatient"/>
         </VBox>
     </HBox>
     <TableView fx:id="tablePatients">
         <columns>
-            <TableColumn fx:id="colNom" text="Nom"/>
-            <TableColumn fx:id="colPrenom" text="Prénom"/>
+            <TableColumn fx:id="colNombre" text="Nombre"/>
+            <TableColumn fx:id="colApellido" text="Apellido"/>
         </columns>
     </TableView>
 </VBox>

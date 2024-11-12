@@ -13,43 +13,58 @@ import java.sql.Date;
 public class PatientController {
 
     @FXML
-    private TextField txtNom;
+    private TextField txtNombre;
     @FXML
-    private TextField txtPrenom;
+    private TextField txtApellido;
     @FXML
-    private DatePicker dateNaissancePicker;
+    private DatePicker dateNacimientoPicker;
     @FXML
-    private TextField txtAdresse;
+    private TextField txtDireccion;
     @FXML
-    private TextField txtTel;
+    private TextField txtTelefono;
     @FXML
-    private TextField txtEmail;
+    private TextField txtCorreoElectronico;
     @FXML
-    private ChoiceBox<String> choiceSexe;
+    private ChoiceBox<String> choiceSexo;
     @FXML
-    private ChoiceBox<String> choiceGsanguin;
+    private ChoiceBox<String> choiceGrupoSanguineo;
     @FXML
-    private ChoiceBox<String> choiceSituation;
+    private ChoiceBox<String> choiceEstadoCivil;
     @FXML
     private TableView<Patient> tablePatients;
     @FXML
-    private TableColumn<Patient, String> colNom;
+    private TableColumn<Patient, String> colNombre;
     @FXML
-    private TableColumn<Patient, String> colPrenom;
+    private TableColumn<Patient, String> colApellido;
 
     private PatientService patientService = new PatientService();
     private ObservableList<Patient> patientList = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-        choiceSexe.getItems().addAll("M", "F");
-        choiceGsanguin.getItems().addAll("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-");
-        choiceSituation.getItems().addAll("Célibataire", "Marié", "Divorcé", "Veuf");
+        choiceSexo.getItems().addAll("M", "F");
+        choiceGrupoSanguineo.getItems().addAll("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-");
+        choiceEstadoCivil.getItems().addAll("Soltero", "Casado", "Divorciado", "Viudo");
 
-        colNom.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNom()));
-        colPrenom.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPrenom()));
+        colNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+        colApellido.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getApellido()));
 
         loadPatients();
+
+        // Añadir listener para llenar los campos al seleccionar un paciente
+        tablePatients.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedPatient) -> {
+            if (selectedPatient != null) {
+                txtNombre.setText(selectedPatient.getNombre());
+                txtApellido.setText(selectedPatient.getApellido());
+                dateNacimientoPicker.setValue(selectedPatient.getFechaNacimiento().toLocalDate());
+                txtDireccion.setText(selectedPatient.getDireccion());
+                txtTelefono.setText(selectedPatient.getTelefono());
+                txtCorreoElectronico.setText(selectedPatient.getCorreoElectronico());
+                choiceSexo.setValue(selectedPatient.getSexo());
+                choiceGrupoSanguineo.setValue(selectedPatient.getGrupoSanguineo());
+                choiceEstadoCivil.setValue(selectedPatient.getEstadoCivil());
+            }
+        });
     }
 
     private void loadPatients() {
@@ -61,15 +76,15 @@ public class PatientController {
     @FXML
     private void addPatient() {
         Patient patient = new Patient(
-            txtNom.getText(),
-            txtPrenom.getText(),
-            Date.valueOf(dateNaissancePicker.getValue()),
-            txtAdresse.getText(),
-            txtTel.getText(),
-            txtEmail.getText(),
-            choiceSexe.getValue(),
-            choiceGsanguin.getValue(),
-            choiceSituation.getValue()
+                txtNombre.getText(),
+                txtApellido.getText(),
+                Date.valueOf(dateNacimientoPicker.getValue()),
+                txtDireccion.getText(),
+                txtTelefono.getText(),
+                txtCorreoElectronico.getText(),
+                choiceSexo.getValue(),
+                choiceGrupoSanguineo.getValue(),
+                choiceEstadoCivil.getValue()
         );
 
         patientService.addPatient(patient);
@@ -81,6 +96,31 @@ public class PatientController {
         Patient selectedPatient = tablePatients.getSelectionModel().getSelectedItem();
         if (selectedPatient != null) {
             patientService.deletePatient(selectedPatient.getId());
+            loadPatients();
+        }
+    }
+
+    @FXML
+    private void editPatient() {
+        Patient selectedPatient = tablePatients.getSelectionModel().getSelectedItem();
+        if (selectedPatient != null) {
+            // Obtener los nuevos valores desde los campos de texto
+            selectedPatient.setNombre(txtNombre.getText());
+            selectedPatient.setApellido(txtApellido.getText());
+
+            if (dateNacimientoPicker.getValue() != null) {
+                selectedPatient.setFechaNacimiento(Date.valueOf(dateNacimientoPicker.getValue()));
+            }
+
+            selectedPatient.setDireccion(txtDireccion.getText());
+            selectedPatient.setTelefono(txtTelefono.getText());
+            selectedPatient.setCorreoElectronico(txtCorreoElectronico.getText());
+            selectedPatient.setSexo(choiceSexo.getValue());
+            selectedPatient.setGrupoSanguineo(choiceGrupoSanguineo.getValue());
+            selectedPatient.setEstadoCivil(choiceEstadoCivil.getValue());
+
+            // Llamar al servicio para actualizar en la base de datos
+            patientService.updatePatient(selectedPatient);
             loadPatients();
         }
     }

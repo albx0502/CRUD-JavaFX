@@ -11,33 +11,50 @@ import java.sql.Date;
 @Setter
 @Table(name = "patients")
 public class Patient {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    private String nom;
-    private String prenom;
-    private Date dateNaissance;
-    private String adresse;
-    private String tel;
-    private String email;
-    private String sexe;
-    private String gsanguin;
-    private String situation;
+
+    @Column(name = "nombre")
+    private String nombre;
+
+    @Column(name = "apellido")
+    private String apellido;
+
+    @Column(name = "fecha_nacimiento")
+    private Date fechaNacimiento;
+
+    @Column(name = "direccion")
+    private String direccion;
+
+    @Column(name = "telefono")
+    private String telefono;
+
+    @Column(name = "correo_electronico")
+    private String correoElectronico;
+
+    @Column(name = "sexo")
+    private String sexo;
+
+    @Column(name = "grupo_sanguineo")
+    private String grupoSanguineo;
+
+    @Column(name = "estado_civil")
+    private String estadoCivil;
 
     public Patient() {
     }
-    public Patient(String nom, String prenom, Date dateNaissance, String adresse, String tel, String email, String sexe, String gsanguin, String situation) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.dateNaissance = dateNaissance;
-        this.adresse = adresse;
-        this.tel = tel;
-        this.email = email;
-        this.sexe = sexe;
-        this.gsanguin = gsanguin;
-        this.situation = situation;
+
+    public Patient(String nombre, String apellido, Date fechaNacimiento, String direccion, String telefono, String correoElectronico, String sexo, String grupoSanguineo, String estadoCivil) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fechaNacimiento = fechaNacimiento;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.correoElectronico = correoElectronico;
+        this.sexo = sexo;
+        this.grupoSanguineo = grupoSanguineo;
+        this.estadoCivil = estadoCivil;
     }
-
-
 }
