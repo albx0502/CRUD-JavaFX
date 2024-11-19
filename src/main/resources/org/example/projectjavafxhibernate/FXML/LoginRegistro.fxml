@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.projectjavafxhibernate.Controller.LoginRegistroController"
+      spacing="15" alignment="CENTER" style="-fx-padding: 20; -fx-pref-width: 400; -fx-pref-height: 500;">
+
+    <Label text="Gestión de Usuarios" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <!-- Login Section -->
+    <VBox spacing="10" alignment="CENTER" style="-fx-padding: 10; -fx-border-color: lightgray; -fx-border-width: 1; -fx-border-radius: 5;">
+        <Label text="Iniciar Sesión" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+        <TextField fx:id="txtUsuarioLogin" promptText="Introduce tu usuario" style="-fx-pref-width: 250px;"/>
+        <PasswordField fx:id="txtPasswordLogin" promptText="Introduce tu contraseña" style="-fx-pref-width: 250px;"/>
+        <Button text="Iniciar Sesión" onAction="#handleLogin" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-border-radius: 5; -fx-padding: 5 20;"/>
+    </VBox>
+
+    <!-- Registro Section -->
+    <VBox spacing="10" alignment="CENTER" style="-fx-padding: 10; -fx-border-color: lightgray; -fx-border-width: 1; -fx-border-radius: 5;">
+        <Label text="Registrar Usuario" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+        <TextField fx:id="txtUsuarioRegistro" promptText="Nuevo Usuario" style="-fx-pref-width: 250px;"/>
+        <PasswordField fx:id="txtPasswordRegistro" promptText="Nueva Contraseña" style="-fx-pref-width: 250px;"/>
+        <Button text="Registrar" onAction="#handleRegistro" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-border-radius: 5; -fx-padding: 5 20;"/>
+    </VBox>
+</VBox>

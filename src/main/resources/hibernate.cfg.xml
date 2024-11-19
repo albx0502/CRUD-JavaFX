@@ -14,5 +14,6 @@
         <property name="hibernate.dialect.storage_engine">myisam</property>
 
         <mapping class="org.example.projectjavafxhibernate.Model.Patient"/>
+        <mapping class="org.example.projectjavafxhibernate.Model.Usuario"/>
     </session-factory>
 </hibernate-configuration>

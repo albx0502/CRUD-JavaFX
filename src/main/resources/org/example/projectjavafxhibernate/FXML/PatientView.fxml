@@ -2,31 +2,45 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.projectjavafxhibernate.Controller.PatientController">
-    <HBox spacing="10">
-        <VBox>
-            <TextField fx:id="txtNombre" promptText="Nombre"/>
-            <TextField fx:id="txtApellido" promptText="Apellido"/>
-            <DatePicker fx:id="dateNacimientoPicker" promptText="Fecha de Nacimiento"/>
-            <TextField fx:id="txtDireccion" promptText="Dirección"/>
-            <TextField fx:id="txtTelefono" promptText="Teléfono"/>
-            <TextField fx:id="txtCorreoElectronico" promptText="Correo Electrónico"/>
-            <ChoiceBox fx:id="choiceSexo"/>
-            <ChoiceBox fx:id="choiceGrupoSanguineo"/>
-            <ChoiceBox fx:id="choiceEstadoCivil"/>
+      fx:controller="org.example.projectjavafxhibernate.Controller.PatientController"
+      spacing="15" style="-fx-padding: 20; -fx-pref-width: 400; -fx-pref-height: 500;">
+
+    <Label text="Gestión de Pacientes" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <!-- Formulario y Botones -->
+    <HBox spacing="20" alignment="CENTER">
+        <!-- Formulario -->
+        <VBox spacing="10" style="-fx-padding: 10; -fx-border-color: lightgray; -fx-border-width: 1; -fx-border-radius: 5;">
+            <TextField fx:id="txtNombre" promptText="Nombre" style="-fx-pref-width: 300px;"/>
+            <TextField fx:id="txtApellido" promptText="Apellido" style="-fx-pref-width: 300px;"/>
+            <DatePicker fx:id="dateNacimientoPicker" promptText="Fecha de Nacimiento" style="-fx-pref-width: 300px;"/>
+            <TextField fx:id="txtDireccion" promptText="Dirección" style="-fx-pref-width: 300px;"/>
+            <TextField fx:id="txtTelefono" promptText="Teléfono" style="-fx-pref-width: 300px;"/>
+            <TextField fx:id="txtCorreoElectronico" promptText="Correo Electrónico" style="-fx-pref-width: 300px;"/>
+            <ChoiceBox fx:id="choiceSexo" style="-fx-pref-width: 300px;"/>
+            <ChoiceBox fx:id="choiceGrupoSanguineo" style="-fx-pref-width: 300px;"/>
+            <ChoiceBox fx:id="choiceEstadoCivil" style="-fx-pref-width: 300px;"/>
         </VBox>
-        <VBox>
-            <Button text="Añadir" onAction="#addPatient"/>
-            <Button text="Editar" onAction="#editPatient"/>
-            <Button text="Eliminar" onAction="#deletePatient"/>
+
+        <!-- Botones -->
+        <VBox spacing="10" alignment="CENTER">
+            <Button text="Añadir" onAction="#addPatient" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-pref-width: 120px;"/>
+            <Button text="Editar" onAction="#editPatient" style="-fx-background-color: #17a2b8; -fx-text-fill: white; -fx-pref-width: 120px;"/>
+            <Button text="Eliminar" onAction="#deletePatient" style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-pref-width: 120px;"/>
+            <Button text="Cerrar Sesión" onAction="#cerrarSesion" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-pref-width: 120px;"/>
+            <Button text="Exportar a CSV" onAction="#exportToCSV" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-pref-width: 120px;"/>
+            <Button text="Importar CSV" onAction="#importFromCSV" style="-fx-background-color: #ffc107; -fx-text-fill: white; -fx-pref-width: 120px;"/>
         </VBox>
     </HBox>
-    <TableView fx:id="tablePatients">
+
+    <!-- Tabla -->
+    <TableView fx:id="tablePatients" style="-fx-border-color: lightgray; -fx-border-width: 1; -fx-border-radius: 5;">
         <columns>
-            <TableColumn fx:id="colNombre" text="Nombre"/>
-            <TableColumn fx:id="colApellido" text="Apellido"/>
+            <TableColumn fx:id="colNombre" text="Nombre" style="-fx-alignment: CENTER;"/>
+            <TableColumn fx:id="colApellido" text="Apellido" style="-fx-alignment: CENTER;"/>
         </columns>
     </TableView>
 </VBox>
