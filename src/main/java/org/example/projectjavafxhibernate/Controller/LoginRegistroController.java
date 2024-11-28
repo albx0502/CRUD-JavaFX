@@ -63,12 +63,6 @@ public class LoginRegistroController {
         }
     }
 
-
-
-
-
-
-
     @FXML
     private void handleRegistro() {
         String username = txtUsuarioRegistro.getText().trim();
